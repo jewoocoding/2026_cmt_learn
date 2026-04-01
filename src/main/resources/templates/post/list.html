@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+</head>
+<body>
+<h1>게시판</h1>
+
+<a href="/posts/new">글쓰기</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
+        <td th:text="${post.author}"></td>
+        <td th:text="${post.viewCount}"></td>
+        <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(posts)}">
+        <td colspan="5">게시글이 없습니다.</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
