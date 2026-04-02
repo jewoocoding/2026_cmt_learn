@@ -21,4 +21,10 @@ public class PostApiController {
         return ResponseEntity.ok(null);
     }
 
+    @Operation(summary = "게시글 목록 조회")
+    @GetMapping
+    public ResponseEntity<Integer> getPostLists() {
+        return null;
+    }
+
 }
