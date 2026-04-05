@@ -11,6 +11,10 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+logging:
+  level:
+    com.example.demo.mapper: DEBUG
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

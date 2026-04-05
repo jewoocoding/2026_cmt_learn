@@ -1,7 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.demo.mapper.PostMapper">
 
+    <select id="findAll" resultType="Post">
+        SELECT
+            id,
+            title,
+            author,
+            contents,
+            viewCount,
+            regDate
+        FROM tb_board
+        ORDER BY id DESC
+    </select>
+
+    <select id="findOne" resultType="Post">
+        SELECT
+            id,
+            title,
+            author,
+            contents,
+            viewCount,
+            regDate
+        FROM tb_board
+        WHERE id = #{id}
+    </select>
+
+    <insert id="save" parameterType="Post">
+        INSERT INTO tb_board (
+            title,
+            author,
+            contents,
+            viewCount,
+            regDate
+        ) VALUES (
+            #{title},
+            #{author},
+            #{contents},
+            #{viewCount},
+            NOW()
+        )
+    </insert>
+
+    <update id="modify" parameterType="Post">
+        UPDATE tb_board SET
+            title = #{title},
+            contents = #{contents}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Post">
+        DELETE from tb_board
+        WHERE id = #{id}
+    </delete>
 </mapper>
