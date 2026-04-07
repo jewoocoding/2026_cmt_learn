@@ -36,7 +36,7 @@ public class PostController {
     @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("post", new Post());
-        return "post/Form";
+        return "post/form";
     }
 
     // 4. 게시글 등록 처리  왜 안죄지? 맞는데이거? 델값에 넣는거자나 왜안되는거임?
@@ -51,7 +51,7 @@ public class PostController {
     public String editForm(@PathVariable Long id, Model model) {
         Post post = postService.findbyId(id);
         model.addAttribute("post", post);
-        return "post/Form";
+        return "post/form";
     }
 
     // 6. 게시글 수정 처리
