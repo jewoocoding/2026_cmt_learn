@@ -26,9 +26,7 @@ public class Post {
     @CreatedDate
     private LocalDateTime createdAt;
 
-    public void viewCount() {
-        viewcount++;
-}
+
 }
 
 
