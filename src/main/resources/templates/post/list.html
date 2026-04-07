@@ -21,10 +21,11 @@
     </thead>
     <tbody>
     <tr th:each="post : ${posts}">
+
         <td th:text="${post.id}"></td>
         <td><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
         <td th:text="${post.author}"></td>
-        <td th:text="${post.viewCount}"></td>
+        <td th:text="${post.viewcount}"></td>
         <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></td>
     </tr>
     <tr th:if="${#lists.isEmpty(posts)}">
