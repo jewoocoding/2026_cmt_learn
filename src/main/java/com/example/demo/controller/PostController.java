@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/posts")
@@ -22,7 +21,7 @@ public class PostController {
 
     // 1. 게시글 전체 목록 화면
     @GetMapping
-    public String list(Model model, @PageableDefault(size = 10, sort = "id",
+    public String list(Model model, @PageableDefault(sort = "id",
             direction = Sort.Direction.DESC) Pageable pageable) {
 
         // 1. 서비스에 pageable을 전달해서 딱 3개만 담긴 Page 객체를 받습니다.
