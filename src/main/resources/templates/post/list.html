@@ -1,5 +1,7 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org" lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>게시판</title>
@@ -21,16 +23,37 @@
     </thead>
     <tbody>
     <tr th:each="post : ${posts}">
+
         <td th:text="${post.id}"></td>
         <td><a th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}"></a></td>
         <td th:text="${post.author}"></td>
-        <td th:text="${post.viewCount}"></td>
+        <td th:text="${post.viewcount}"></td>
         <td th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></td>
     </tr>
     <tr th:if="${#lists.isEmpty(posts)}">
         <td colspan="5">게시글이 없습니다.</td>
     </tr>
+
     </tbody>
 </table>
+    <!-- 여긴 ai 힘 썼습니다-->
+    <div th:if="${!posts.isEmpty()}">
+        <ul style="display: flex; list-style: none;">
+            <li th:classappend="${!posts.hasPrevious()} ? 'disabled'">
+                <a th:href="@{/posts(page=${posts.number - 1})}" th:if="${posts.hasPrevious()}">이전</a>
+                <span th:unless="${posts.hasPrevious()}">이전</span>
+            </li>
+
+            <li th:each="page : ${#numbers.sequence(0, posts.totalPages - 1)}"
+                th:style="${page == posts.number} ? 'font-weight: bold; margin: 0 5px;' : 'margin: 0 5px;'">
+                <a th:href="@{/posts(page=${page})}" th:text="${page + 1}"></a>
+            </li>
+
+            <li th:classappend="${!posts.hasNext()} ? 'disabled'">
+                <a th:href="@{/posts(page=${posts.number + 1})}" th:if="${posts.hasNext()}">다음</a>
+                <span th:unless="${posts.hasNext()}">다음</span>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
