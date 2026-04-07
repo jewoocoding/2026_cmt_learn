@@ -3,6 +3,10 @@ package com.example.demo.controller;
 import com.example.demo.domain.Post;
 import com.example.demo.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +22,15 @@ public class PostController {
 
     // 1. 게시글 전체 목록 화면
     @GetMapping
-    public String list(Model model) {
-        List<Post> posts = postService.findAll();
-        model.addAttribute("posts", posts);
+    public String list(Model model, @PageableDefault(size = 10, sort = "id",
+            direction = Sort.Direction.DESC) Pageable pageable) {
+
+        // 1. 서비스에 pageable을 전달해서 딱 3개만 담긴 Page 객체를 받습니다.
+        Page<Post> postPage = postService.getPostList(pageable);
+
+        // 2. HTML에 Page 객체를 통째로 넘깁니다.
+        model.addAttribute("posts", postPage);
+
         return "post/list";
     }
 

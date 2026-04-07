@@ -8,12 +8,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 @Data
-@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-//이게 왜 안먹지?
 @EntityListeners(AuditingEntityListener.class)
 public class Post {
 
@@ -28,22 +26,6 @@ public class Post {
     private long viewcount;
     @CreatedDate
     private LocalDateTime createdAt;
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
-
-
-    public String getTitle() {
-
-        return title;
-    }
-    public String getContent() {
-        return content;
-    }
-
-    public String getAuthor() {
-
-        return author;
-    }
 
     public void viewCount() {
         viewcount++;

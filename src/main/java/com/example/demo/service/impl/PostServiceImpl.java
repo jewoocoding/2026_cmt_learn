@@ -7,9 +7,9 @@ import com.example.demo.service.PostService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.beans.Transient;
 import java.util.List;
 
 
@@ -21,6 +21,7 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
 
     @Override
+    @Transactional
     public Post save(Post post) {
         Post postSave = Post.builder()
                 .title(post.getTitle())
@@ -32,12 +33,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public List<Post> findAll() {
 
         return postRepository.findAll();
     }
 
     @Override
+    @Transactional
     public Post findbyId(long id) {
         return postRepository.findById(id).orElseThrow(() -> new RuntimeException("아이디를 찾을수없다"));
     }
@@ -56,8 +59,16 @@ public class PostServiceImpl implements PostService {
         return postUpdate;
     }
 
-    @Override public void delete(long id) {
+    @Override
+    @Transactional
+    public void delete(long id) {
        postRepository.deleteById(id);
+
+   }
+   @Override
+   @Transactional
+    public Page<Post> getPostList(Pageable pageable){
+            return postRepository.findAll(pageable);
 
    }
 
