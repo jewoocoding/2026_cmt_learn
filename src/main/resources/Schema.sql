@@ -5,5 +5,6 @@ create table tb_board(
                          author varchar(20),
                          contents text,
                          viewCount int,
-                         regdate DATE NOT NULL
+                         regdate DATE NOT NULL,
+                         is_deleted bool DEFAULT 0;
 );
