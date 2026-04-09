@@ -13,7 +13,7 @@
             contents,
             viewCount,
             regDate
-        FROM tb_board
+        FROM tb_board where is_deleted = 0
         ORDER BY id DESC
     </select>
 
@@ -26,7 +26,7 @@
             viewCount,
             regDate
         FROM tb_board
-        WHERE id = #{id}
+        WHERE id = #{id} and is_deleted = 0
     </select>
 
     <insert id="save" parameterType="Post">
@@ -49,11 +49,10 @@
         UPDATE tb_board SET
             title = #{title},
             contents = #{contents}
-        WHERE id = #{id}
+        WHERE id = #{id} and is_deleted = 0
     </update>
 
-    <delete id="delete" parameterType="Post">
-        DELETE from tb_board
-        WHERE id = #{id}
-    </delete>
+    <update id="delete" parameterType="int">
+        UPDATE tb_board SET is_deleted = 1 WHERE id = #{id}
+    </update>
 </mapper>

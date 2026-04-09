@@ -1,5 +1,4 @@
 package com.example.demo.controller;
-
 import com.example.demo.domain.Post;
 import com.example.demo.service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Tag(name = "게시판 API", description = "게시글 및 댓글 CRUD")
 @RestController
-@RequestMapping("/posts")
+@RequestMapping("api/posts")
 @RequiredArgsConstructor
 public class PostApiController {
 
